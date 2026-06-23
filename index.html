@@ -2,123 +2,105 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>Naga Emas Terbang Mewah - Pusaka Media</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  html, body { width:100%; height:100%; overflow:hidden; background:#05020f; font-family:'Cormorant Garamond', serif;}
-  canvas { display:block; position:absolute; top:0; left:0; width:100%; height:100%; }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { width:100%; height:100%; overflow:hidden; background:#05020f; font-family:'Cormorant Garamond', serif; touch-action:none;}
+  #c { display:block; position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; }
   #ui {
     position:absolute; top:0; left:0; right:0; z-index:10; pointer-events:none;
-    text-align:center; padding-top: 38px;
+    text-align:center; padding-top: 28px;
     color: #f9e6b5;
     text-shadow: 0 2px 30px rgba(255,180,60,0.35), 0 0 12px rgba(212,175,55,0.6);
   }
   #ui h1 {
     font-family:'Cinzel Decorative', serif;
     font-weight:900;
-    font-size: clamp(28px, 5vw, 64px);
-    letter-spacing: 0.08em;
+    font-size: clamp(22px, 5.4vw, 62px);
+    letter-spacing: 0.06em;
     background: linear-gradient(180deg, #fff7d6 0%, #f8d270 22%, #d4a437 45%, #a66f1e 65%, #f5d06a 85%, #fff2c5 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
     filter: drop-shadow(0 4px 18px rgba(255,170,30,0.25));
-    margin-bottom:6px;
+    margin-bottom:4px;
   }
   #ui p.subtitle {
-    font-size: clamp(13px,1.6vw,20px);
-    letter-spacing: 0.28em;
+    font-size: clamp(11px,1.6vw,18px);
+    letter-spacing: 0.22em;
     text-transform: uppercase;
     color:#e9c97a;
     opacity:.92;
   }
   #ui p.desc {
-    margin-top:10px;
-    font-size: clamp(12px,1.2vw,15px);
+    margin-top:8px;
+    font-size: clamp(11px,1.15vw,15px);
     color:#d8bc82cc;
-    letter-spacing: .04em;
+    letter-spacing: .03em;
     max-width: 620px;
     margin-left:auto; margin-right:auto;
-    line-height:1.55;
+    line-height:1.5; padding:0 14px;
   }
-  .ornament {
-    width:180px; height:22px; margin:14px auto 0 auto; opacity:.9;
-    background: none;
-  }
+  .ornament { width:150px; height:18px; margin:10px auto 0 auto; opacity:.9; display:block; }
   .corner {
-    position:absolute; z-index:5; pointer-events:none; opacity:.72;
-    width:160px; height:160px;
-    background-repeat:no-repeat;
+    position:absolute; z-index:5; pointer-events:none; opacity:.6;
+    width:110px; height:110px;
   }
-  .corner.tl { top:18px; left:22px;
-    background-image: radial-gradient(ellipse at top left, rgba(255,210,110,0.20) 0%, transparent 65%),
-    linear-gradient(135deg, transparent 42%, #d4af37 42% 44%, transparent 44% 56%, #d4af37 56% 58%, transparent 58%);
-    border-top:2px solid #d4af3755;
-    border-left:2px solid #d4af3755;
-    border-top-left-radius: 24px;
-  }
-  .corner.tr { top:18px; right:22px;
-    border-top:2px solid #d4af3755;
-    border-right:2px solid #d4af3755;
-    border-top-right-radius: 24px;
-  }
-  .corner.bl { bottom:18px; left:22px;
-    border-bottom:2px solid #d4af3755;
-    border-left:2px solid #d4af3755;
-    border-bottom-left-radius: 24px;
-  }
-  .corner.br { bottom:18px; right:22px;
-    border-bottom:2px solid #d4af3755;
-    border-right:2px solid #d4af3755;
-    border-bottom-right-radius: 24px;
-  }
+  .corner.tl { top:10px; left:12px; border-top:2px solid #d4af3755; border-left:2px solid #d4af3755; border-top-left-radius: 18px; }
+  .corner.tr { top:10px; right:12px; border-top:2px solid #d4af3755; border-right:2px solid #d4af3755; border-top-right-radius: 18px; }
+  .corner.bl { bottom:10px; left:12px; border-bottom:2px solid #d4af3755; border-left:2px solid #d4af3755; border-bottom-left-radius: 18px; }
+  .corner.br { bottom:10px; right:12px; border-bottom:2px solid #d4af3755; border-right:2px solid #d4af3755; border-bottom-right-radius: 18px; }
+
   #footer {
-    position:absolute; bottom:22px; width:100%; text-align:center; z-index:10;
-    color:#c9a95fbb; font-size:13px; letter-spacing:.12em;
-    pointer-events:none;
+    position:absolute; bottom:10px; width:100%; text-align:center; z-index:10;
+    color:#c9a95f99; font-size:11px; letter-spacing:.1em;
+    pointer-events:none; padding:0 12px;
   }
   #controls {
-    position:absolute; bottom:24px; left:26px; z-index:20;
-    color:#e5c87a; font-size:12.5px; letter-spacing:.06em;
-    background: rgba(19,12,4,0.38);
-    border:1px solid rgba(212,175,55,0.25);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding:14px 16px; border-radius:14px;
-    line-height:1.7;
-    box-shadow: 0 8px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,230,160,.12);
-    max-width: 280px;
+    position:absolute; bottom:18px; left:14px; z-index:30;
+    color:#e5c87a; font-size:12.5px; letter-spacing:.04em;
+    background: rgba(19,12,4,0.72);
+    border:1px solid rgba(212,175,55,0.32);
+    padding:12px 14px; border-radius:13px;
+    line-height:1.6;
+    box-shadow: 0 8px 30px rgba(0,0,0,.45);
+    max-width: 300px;
     pointer-events:auto;
   }
   #controls b { color:#ffe6a3; }
   #controls button {
     background: linear-gradient(180deg,#f6d47a,#c9952e);
     border:none; color:#3a1f00; font-weight:700;
-    padding:7px 12px; border-radius:9px; cursor:pointer; font-size:12px;
-    margin:3px 4px 3px 0; letter-spacing:.03em;
-    box-shadow: 0 3px 10px rgba(201,149,46,.28);
+    padding:8px 13px; border-radius:9px; cursor:pointer; font-size:13px;
+    margin:4px 4px 3px 0; letter-spacing:.02em;
     font-family: 'Cormorant Garamond', serif;
-    transition: transform .12s;
+    touch-action: manipulation;
   }
-  #controls button:hover { transform: translateY(-1px); }
   #controls button.secondary {
-    background: rgba(255,225,140,0.09);
+    background: rgba(255,225,140,0.10);
     color:#e9c97a;
-    border:1px solid rgba(212,175,55,.35);
-    box-shadow:none;
+    border:1px solid rgba(212,175,55,.38);
+  }
+  #errbox {
+    position: fixed; top: 8px; left: 8px; right: 8px; z-index: 99;
+    background: #b91c1c; color: #fff; font-family: monospace;
+    font-size: 12px; padding: 8px 10px; border-radius: 8px;
+    display:none; white-space:pre-wrap;
   }
   @media (max-width:720px){
-    #controls{ left:12px; right:12px; bottom:12px; max-width:none; font-size:11.5px;}
-    .corner{ width:90px; height:90px; }
-    #ui{ padding-top:22px; padding-left:12px; padding-right:12px;}
+    #controls{ left:10px; right:10px; bottom:44px; max-width:none; font-size:12px;}
+    .corner{ width:66px; height:66px; }
+    #ui{ padding-top:16px; }
+    #footer{ bottom:8px; font-size:10px;}
   }
 </style>
 </head>
 <body>
+<div id="errbox"></div>
 <div class="corner tl"></div>
 <div class="corner tr"></div>
 <div class="corner bl"></div>
@@ -127,12 +109,9 @@
 <div id="ui">
   <h1>NĀGA SUWARNADWIPA</h1>
   <p class="subtitle">Naga Emas Terbang Mewah</p>
-  <svg class="ornament" viewBox="0 0 200 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="ornament" viewBox="0 0 200 22" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M2 11 C40 2 60 20 100 11 C140 2 160 20 198 11" stroke="#d4af37" stroke-width="1.2" fill="none"/>
     <circle cx="100" cy="11" r="3.5" fill="#f5d06a" />
-    <circle cx="60" cy="11" r="1.8" fill="#e7c060" opacity=".9"/>
-    <circle cx="140" cy="11" r="1.8" fill="#e7c060" opacity=".9"/>
-    <path d="M93 11 l7 -6 l7 6 l-7 6z" fill="none" stroke="#f0c75a" stroke-width="0.9" opacity=".7"/>
   </svg>
   <p class="desc">Penjaga langit Nusantara — sisik emas tempa Majapahit, bernafas api suci, menari di antara awan dan bintang.</p>
 </div>
@@ -141,10 +120,10 @@
 
 <div id="controls">
   <div><b>Naga Emas Pusaka</b><br>
-  Gerakkan mouse / sentuh untuk menuntun naga<br>
-  <span style="opacity:.8">Klik untuk sembur api • Space untuk mode megah</span></div>
-  <div style="margin-top:8px">
-    <button id="btnFire">SEM BUR API 🔥</button>
+  Gerakkan jari untuk menuntun naga<br>
+  <span style="opacity:.82">Tap layar untuk sembur api</span></div>
+  <div style="margin-top:7px">
+    <button id="btnFire">SEMBUR API 🔥</button>
     <button id="btnMode" class="secondary">Mode Khidmat</button>
     <button id="btnTrail" class="secondary">Jejak: ON</button>
   </div>
@@ -153,668 +132,281 @@
 <div id="footer">PUSAKA MEDIA • Belajar-coding • © 2025 Nusantara Digital Heritage</div>
 
 <script>
-(() => {
-const canvas = document.getElementById('c');
-const ctx = canvas.getContext('2d');
-let W, H, DPR = Math.min(window.devicePixelRatio || 1, 2);
+(function(){
+var errbox = document.getElementById('errbox');
+function showErr(m){ errbox.style.display='block'; errbox.textContent = 'Error: '+m; }
+window.onerror = function(msg, src, line, col){ showErr(msg + ' @' + line + ':' + col); };
+
+var canvas = document.getElementById('c');
+var ctx = canvas.getContext('2d', {alpha:false});
+if(!ctx){ showErr('Canvas 2d tidak didukung'); return; }
+
+var W=0, H=0, DPR = Math.min(window.devicePixelRatio || 1, 1.75);
 function resize(){
-  W = canvas.clientWidth = window.innerWidth;
-  H = canvas.clientHeight = window.innerHeight;
-  canvas.width = W * DPR;
-  canvas.height = H * DPR;
+  W = window.innerWidth;
+  H = window.innerHeight;
+  canvas.width = Math.floor(W * DPR);
+  canvas.height = Math.floor(H * DPR);
+  canvas.style.width = W + 'px';
+  canvas.style.height = H + 'px';
   ctx.setTransform(DPR,0,0,DPR,0,0);
 }
 window.addEventListener('resize', resize);
 resize();
 
 // Stars
-const stars = Array.from({length: 210}, ()=> ({
-  x: Math.random(), y: Math.random()*0.82,
-  s: Math.random()*1.7+0.3,
-  tw: Math.random()*Math.PI*2,
-  sp: 0.015+Math.random()*0.022
-}));
+var stars = [];
+for(var i=0;i<160;i++){ stars.push({x:Math.random(), y:Math.random()*0.78, s:Math.random()*1.5+0.4, tw: Math.random()*6.28, sp: 0.015+Math.random()*0.02 });}
 
-// Cloud puffs
-const clouds = Array.from({length: 9}, (_,i)=>({
-  x: Math.random()*W,
-  y: H*(0.18+Math.random()*0.55),
-  r: 80 + Math.random()*140,
-  speed: 0.06 + Math.random()*0.14,
-  layer: Math.floor(Math.random()*3),
-  o: 0.05 + Math.random()*0.09
-}));
-
-// Mountains parallax
-function drawMountains(time){
-  // far
-  ctx.save();
-  ctx.fillStyle = '#0b1126';
-  ctx.beginPath();
-  ctx.moveTo(0, H*0.78);
-  for(let x=0;x<=W;x+=28){
-    const y = H*0.78 + Math.sin((x+time*0.012)*0.008)*18 + Math.sin(x*0.017)*14;
-    ctx.lineTo(x,y);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-  // mid
-  ctx.fillStyle = '#0e1735';
-  ctx.beginPath();
-  ctx.moveTo(0, H*0.84);
-  for(let x=0;x<=W;x+=22){
-    const y = H*0.84 + Math.sin((x+time*0.02)*0.011)*22 + Math.cos(x*0.013)*10;
-    ctx.lineTo(x,y);
-  }
-  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
-  // temples silhouette
-  ctx.fillStyle = '#0a0f24';
-  const templeXs = [W*0.12, W*0.33, W*0.71, W*0.88];
-  templeXs.forEach(tx=>{
-    ctx.save();
-    ctx.translate(tx, H*0.84);
-    ctx.beginPath();
-    ctx.moveTo(-18,0); ctx.lineTo(-14,-28); ctx.lineTo(-9,-34); ctx.lineTo(-5,-52);
-    ctx.lineTo(5,-52); ctx.lineTo(9,-34); ctx.lineTo(14,-28); ctx.lineTo(18,0);
-    ctx.closePath(); ctx.fill();
-    ctx.restore();
-  });
-  ctx.restore();
-}
+// Clouds
+var clouds = [];
+for(var i=0;i<7;i++){ clouds.push({ x: Math.random()*W, y: H*(0.2+Math.random()*0.5), r: 70+Math.random()*120, speed: 0.05+Math.random()*0.12, o: 0.045+Math.random()*0.07 });}
 
 // Dragon state
-let mouseX = W*0.62, mouseY = H*0.44;
-let targetX = mouseX, targetY = mouseY;
-let majesticMode = false;
-let trailOn = true;
-let firePower = 0;
+var mouseX = W*0.6, mouseY = H*0.45;
+var targetX = mouseX, targetY = mouseY;
+var majesticMode = false, trailOn = true, firePower = 0;
 
-canvas.addEventListener('mousemove', e=>{
-  const r = canvas.getBoundingClientRect();
-  targetX = e.clientX - r.left;
-  targetY = e.clientY - r.top;
-});
-canvas.addEventListener('touchmove', e=>{
-  e.preventDefault();
-  const t = e.touches[0];
-  const r = canvas.getBoundingClientRect();
-  targetX = t.clientX - r.left;
-  targetY = t.clientY - r.top;
-}, {passive:false});
-canvas.addEventListener('click', ()=> burstFire());
-window.addEventListener('keydown', e=>{
-  if(e.code==='Space'){ e.preventDefault(); majesticMode=!majesticMode; updateModeBtn(); }
-  if(e.code==='KeyF'){ burstFire(); }
-});
+function setTarget(cx, cy){ targetX = cx; targetY = cy; }
+canvas.addEventListener('mousemove', function(e){ setTarget(e.clientX, e.clientY); });
+canvas.addEventListener('touchstart', function(e){ e.preventDefault(); var t=e.touches[0]; setTarget(t.clientX, t.clientY); burstFire(); }, {passive:false});
+canvas.addEventListener('touchmove', function(e){ e.preventDefault(); var t=e.touches[0]; setTarget(t.clientX, t.clientY); }, {passive:false});
+canvas.addEventListener('click', burstFire);
 
-function burstFire(){ firePower = Math.min(firePower + 1.6, 3.2); }
+function burstFire(){ firePower = Math.min(firePower + 1.7, 3.3); }
 
-document.getElementById('btnFire').onclick = burstFire;
-const btnMode = document.getElementById('btnMode');
-btnMode.onclick = ()=>{ majesticMode=!majesticMode; updateModeBtn(); };
-function updateModeBtn(){
-  btnMode.textContent = majesticMode ? 'Mode Terbang' : 'Mode Khidmat';
-}
-const btnTrail = document.getElementById('btnTrail');
-btnTrail.onclick = ()=>{
-  trailOn = !trailOn;
-  btnTrail.textContent = 'Jejak: ' + (trailOn ? 'ON' : 'OFF');
-};
+document.getElementById('btnFire').addEventListener('click', function(e){ e.stopPropagation(); burstFire(); });
+var btnMode = document.getElementById('btnMode');
+btnMode.addEventListener('click', function(e){ e.stopPropagation(); majesticMode=!majesticMode; btnMode.textContent = majesticMode ? 'Mode Terbang' : 'Mode Khidmat'; });
+var btnTrail = document.getElementById('btnTrail');
+btnTrail.addEventListener('click', function(e){ e.stopPropagation(); trailOn=!trailOn; btnTrail.textContent = 'Jejak: ' + (trailOn ? 'ON' : 'OFF'); });
 
-// particles
-const embers = [];
-function spawnEmber(x,y,vx,vy,life,col){
-  embers.push({x,y,vx,vy,life, max:life, col:col||0});
-}
-const goldTrail = [];
-// dragon body nodes
-const BODY_SEGMENTS = 32;
-const body = Array.from({length:BODY_SEGMENTS}, (_,i)=>({x: -200 - i*24, y: H*0.45, a:0}));
-let head = {x: W*0.5, y: H*0.45, vx:0, vy:0, ang: -0.15};
+var embers = [], goldTrail = [];
+var BODY_SEGMENTS = 28;
+var body = [];
+for(var i=0;i<BODY_SEGMENTS;i++){ body.push({x: -120 - i*22, y: H*0.45, a:0}); }
+var head = {x: W*0.5, y: H*0.45, vx:0, vy:0, ang: -0.15};
 
-let time = 0;
+var time = 0;
 function lerp(a,b,t){ return a+(b-a)*t; }
 
+function drawMountains(tms){
+  ctx.fillStyle = '#0b1126';
+  ctx.beginPath(); ctx.moveTo(0, H*0.78);
+  for(var x=0;x<=W;x+=30){ var y = H*0.78 + Math.sin((x+tms*0.012)*0.008)*16; ctx.lineTo(x,y); }
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#0e1735';
+  ctx.beginPath(); ctx.moveTo(0, H*0.84);
+  for(var x=0;x<=W;x+=24){ var y = H*0.84 + Math.sin((x+tms*0.02)*0.011)*19; ctx.lineTo(x,y); }
+  ctx.lineTo(W,H); ctx.lineTo(0,H); ctx.closePath(); ctx.fill();
+}
+
 function draw(){
+  try{
   time += 16.666;
-  const tSec = time/1000;
+  var tSec = time/1000;
 
-  // easing mouse follower
-  mouseX = lerp(mouseX, targetX, 0.045);
-  mouseY = lerp(mouseY, targetY, 0.045);
+  mouseX = lerp(mouseX, targetX, 0.05);
+  mouseY = lerp(mouseY, targetY, 0.05);
 
-  // background luxurious gradient
-  const bg = ctx.createLinearGradient(0,0,0,H);
-  bg.addColorStop(0, '#05010d');
-  bg.addColorStop(0.22, '#0b0a2a');
-  bg.addColorStop(0.5, '#15103a');
-  bg.addColorStop(0.78, '#1b1440');
-  bg.addColorStop(1, '#21184a');
-  ctx.fillStyle = bg;
-  ctx.fillRect(0,0,W,H);
+  // bg
+  var bg = ctx.createLinearGradient(0,0,0,H);
+  bg.addColorStop(0, '#05010d'); bg.addColorStop(0.5, '#15103a'); bg.addColorStop(1, '#21184a');
+  ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
 
-  // vignette gold
-  const vig = ctx.createRadialGradient(W*0.5, H*0.42, Math.min(W,H)*0.15, W*0.5, H*0.5, Math.max(W,H)*0.9);
-  vig.addColorStop(0, 'rgba(255,210,96,0.028)');
-  vig.addColorStop(1, 'rgba(3,0,10,0.55)');
-  ctx.fillStyle = vig;
-  ctx.fillRect(0,0,W,H);
-
-  // moon - luxurious
-  const moonX = W*0.82, moonY = H*0.20;
+  // moon
+  var moonX = W*0.82, moonY = H*0.19;
   ctx.save();
-  ctx.shadowColor = '#ffe7a8';
-  ctx.shadowBlur = 55;
-  const mg = ctx.createRadialGradient(moonX-18, moonY-18, 5, moonX, moonY, 54);
-  mg.addColorStop(0, '#fff7df');
-  mg.addColorStop(0.45, '#fde5a2');
-  mg.addColorStop(1, '#e6c16b');
-  ctx.fillStyle = mg;
-  ctx.beginPath(); ctx.arc(moonX, moonY, 48, 0, Math.PI*2); ctx.fill();
-  ctx.shadowBlur = 0;
-  // moon texture craters subtle
-  ctx.fillStyle = 'rgba(190,145,60,0.10)';
-  ctx.beginPath(); ctx.arc(moonX-14, moonY-8, 7,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(moonX+10, moonY+12, 5,0,Math.PI*2); ctx.fill();
-  ctx.beginPath(); ctx.arc(moonX+3, moonY-18, 4,0,Math.PI*2); ctx.fill();
-  ctx.restore();
+  ctx.shadowColor = '#ffe7a8'; ctx.shadowBlur = 36;
+  ctx.fillStyle = '#fde5a2';
+  ctx.beginPath(); ctx.arc(moonX, moonY, 38, 0, Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 0; ctx.restore();
 
   // stars
-  stars.forEach(s=>{
-    s.tw += s.sp;
-    const alpha = 0.38 + Math.sin(s.tw)*0.33;
-    ctx.fillStyle = `rgba(255,236,185,${alpha})`;
-    ctx.beginPath();
-    ctx.arc(s.x*W, s.y*H, s.s, 0, Math.PI*2);
-    ctx.fill();
-    if(s.s > 1.2 && Math.random()<0.012){
-      ctx.strokeStyle = `rgba(255,230,160,${alpha*0.7})`;
-      ctx.lineWidth = 0.7;
-      ctx.beginPath();
-      ctx.moveTo(s.x*W-5, s.y*H);
-      ctx.lineTo(s.x*W+5, s.y*H);
-      ctx.moveTo(s.x*W, s.y*H-5);
-      ctx.lineTo(s.x*W, s.y*H+5);
-      ctx.stroke();
-    }
-  });
+  for(var i=0;i<stars.length;i++){
+    var s = stars[i]; s.tw += s.sp;
+    var alpha = 0.38 + Math.sin(s.tw)*0.32;
+    ctx.fillStyle = 'rgba(255,236,185,'+alpha+')';
+    ctx.beginPath(); ctx.arc(s.x*W, s.y*H, s.s, 0, Math.PI*2); ctx.fill();
+  }
 
-  // clouds - slow parallax back layer
-  clouds.forEach((cl, i)=>{
-    cl.x -= cl.speed * (cl.layer*0.45+0.5);
-    if(cl.x < -cl.r*2.3) { cl.x = W + cl.r; cl.y = H*(0.18+Math.random()*0.55); }
-    ctx.save();
-    ctx.globalAlpha = cl.o;
-    const cg = ctx.createRadialGradient(cl.x, cl.y, 10, cl.x, cl.y, cl.r);
-    cg.addColorStop(0, 'rgba(225,210,255,0.34)');
-    cg.addColorStop(1, 'rgba(180,170,230,0)');
-    ctx.fillStyle = cg;
-    ctx.beginPath();
-    ctx.ellipse(cl.x, cl.y, cl.r, cl.r*0.52, 0, 0, Math.PI*2);
-    ctx.fill();
+  // clouds
+  for(var i=0;i<clouds.length;i++){
+    var cl = clouds[i];
+    cl.x -= cl.speed;
+    if(cl.x < -cl.r*2) { cl.x = W + cl.r; cl.y = H*(0.18+Math.random()*0.55); }
+    ctx.save(); ctx.globalAlpha = cl.o;
+    ctx.fillStyle = 'rgba(200,190,240,0.35)';
+    ctx.beginPath(); ctx.ellipse(cl.x, cl.y, cl.r, cl.r*0.52, 0,0,Math.PI*2); ctx.fill();
     ctx.restore();
-  });
+  }
 
   drawMountains(time);
 
-  // ===== DRAGON PATH =====
-  // autonomous majestic flight + mouse influence
-  const autoX = W*0.5 + Math.cos(tSec*0.31)*W*0.29 + Math.cos(tSec*0.71)*W*0.07;
-  const autoY = H*0.44 + Math.sin(tSec*0.47)*H*0.14 + Math.sin(tSec*1.12)*24;
-  const influence = majesticMode ? 0.22 : 0.57;
-  const destX = lerp(autoX, mouseX, influence);
-  const destY = lerp(autoY, mouseY, influence);
+  // dragon movement
+  var autoX = W*0.5 + Math.cos(tSec*0.31)*W*0.26;
+  var autoY = H*0.44 + Math.sin(tSec*0.47)*H*0.13;
+  var influence = majesticMode ? 0.28 : 0.55;
+  var destX = autoX*(1-influence) + mouseX*influence;
+  var destY = autoY*(1-influence) + mouseY*influence;
 
-  // head physics
-  const dx = destX - head.x;
-  const dy = destY - head.y;
+  var dx = destX - head.x, dy = destY - head.y;
   head.vx = head.vx*0.9 + dx*0.018;
   head.vy = head.vy*0.9 + dy*0.018;
-  head.x += head.vx;
-  head.y += head.vy;
+  head.x += head.vx; head.y += head.vy;
   head.ang = Math.atan2(head.vy, head.vx);
 
-  // body follow
-  body[0].x = head.x;
-  body[0].y = head.y;
-  body[0].a = head.ang;
-  for(let i=1;i<BODY_SEGMENTS;i++){
-    const p = body[i-1];
-    const c = body[i];
-    const followDist = 20 - Math.min(i*0.23, 8); // taper
-    const ang = Math.atan2(p.y - c.y, p.x - c.x);
-    const targetDistX = p.x - Math.cos(ang)*followDist;
-    const targetDistY = p.y - Math.sin(ang)*followDist;
-    c.x = lerp(c.x, targetDistX, 0.45);
-    c.y = lerp(c.y, targetDistY, 0.45);
+  body[0].x = head.x; body[0].y = head.y; body[0].a = head.ang;
+  for(var i=1;i<BODY_SEGMENTS;i++){
+    var p = body[i-1], c = body[i];
+    var followDist = 19 - Math.min(i*0.22, 7);
+    var ang = Math.atan2(p.y - c.y, p.x - c.x);
+    c.x = lerp(c.x, p.x - Math.cos(ang)*followDist, 0.45);
+    c.y = lerp(c.y, p.y - Math.sin(ang)*followDist, 0.45);
     c.a = ang;
-    // serpentine sway
-    c.y += Math.sin(tSec*3.4 + i*0.55) * (majesticMode? 1.9 : 3.2) * Math.min(1, i/6);
+    c.y += Math.sin(tSec*3.4 + i*0.55) * (majesticMode?1.8:2.8) * Math.min(1, i/6);
   }
 
-  // gold sacred trail
-  if(trailOn && time%2===0){
-    goldTrail.push({x: head.x, y: head.y, life: 72,
-      sx: (Math.random()-0.5)*0.5, sy:(Math.random()-0.5)*0.5});
-    if(goldTrail.length>170) goldTrail.shift();
+  // trail
+  if(trailOn && (time % 32 < 16)){
+    goldTrail.push({x: head.x, y: head.y, life: 60});
+    if(goldTrail.length>140) goldTrail.shift();
   }
-  // draw trail
-  goldTrail.forEach((gt, idx)=>{
-    gt.life -= 1.1;
-    gt.x += gt.sx; gt.y += gt.sy;
-    const al = Math.max(0, gt.life/72);
-    ctx.save();
-    ctx.globalAlpha = al*0.56;
-    ctx.fillStyle = '#ffd66a';
-    ctx.shadowColor = '#ffc443';
-    ctx.shadowBlur = 8;
-    ctx.beginPath();
-    ctx.arc(gt.x, gt.y, 1.6 + al*2.2, 0, Math.PI*2);
-    ctx.fill();
+  for(var i=goldTrail.length-1;i>=0;i--){
+    var gt = goldTrail[i]; gt.life -= 1.2;
+    if(gt.life<=0){ goldTrail.splice(i,1); continue; }
+    var al = gt.life/60;
+    ctx.save(); ctx.globalAlpha = al*0.5;
+    ctx.fillStyle = '#ffd66a'; ctx.shadowColor='#ffc443'; ctx.shadowBlur=7;
+    ctx.beginPath(); ctx.arc(gt.x, gt.y, 1.4+al*2, 0, Math.PI*2); ctx.fill();
     ctx.restore();
-  });
-  for(let i=goldTrail.length-1;i>=0;i--) if(goldTrail[i].life<=0) goldTrail.splice(i,1);
+  }
 
-  // DRAGON RENDER back to front (tail first)
-  // wing flap
-  const wingFlap = Math.sin(tSec* (majesticMode ? 3.6 : 5.8)) * (majesticMode?0.52:0.78);
-  const wing2Flap = Math.sin(tSec* (majesticMode ? 3.6 : 5.8) + 1.1) * 0.32;
+  // draw body tail->head
+  var wingFlap = Math.sin(tSec * (majesticMode?3.6:5.4)) * (majesticMode?0.5:0.72);
+  for(var i=BODY_SEGMENTS-1; i>=0; i--){
+    var n = body[i];
+    var ti = i / BODY_SEGMENTS;
+    var segScale = 1 - ti*0.6;
+    var radiusY = 15 * segScale + 3;
+    var radiusX = 22 * segScale + 5;
 
-  // draw body segments tail->head
-  for(let i=BODY_SEGMENTS-1; i>=0; i--){
-    const n = body[i];
-    const ti = i / BODY_SEGMENTS; // 0 head, 1 tail
-    const segScale = 1 - ti*0.62; // tail smaller
-    const radiusY = 16 * segScale + 3;
-    const radiusX = 23 * segScale + 6;
+    ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.a);
 
-    ctx.save();
-    ctx.translate(n.x, n.y);
-    ctx.rotate(n.a);
-
-    // belly glow
-    const belly = ctx.createLinearGradient(0,-radiusY,0,radiusY);
-    belly.addColorStop(0, '#fff3c1');
-    belly.addColorStop(0.25, '#f9d572');
-    belly.addColorStop(0.55, '#d99822');
-    belly.addColorStop(1, '#8b4d0d');
-    // dorsal
-    const dorsal = ctx.createLinearGradient(0,-radiusY-6,0,radiusY);
-    dorsal.addColorStop(0, '#ffe7a1');
-    dorsal.addColorStop(0.18, '#ffcc4a');
-    dorsal.addColorStop(0.5, '#d38b17');
-    dorsal.addColorStop(1, '#6b2f09');
-
-    // shadow underbelly
-    ctx.shadowColor = 'rgba(255,176,35,0.18)';
-    ctx.shadowBlur = 14;
-
-    // main torso oval
-    ctx.fillStyle = dorsal;
+    // body
+    ctx.fillStyle = '#e3a523';
     ctx.beginPath();
-    ctx.ellipse(0,0, radiusX, radiusY, 0, 0, Math.PI*2);
+    // ellipse fallback for old browsers
+    if(ctx.ellipse){ ctx.ellipse(0,0, radiusX, radiusY, 0, 0, Math.PI*2); }
+    else { ctx.arc(0,0, radiusY, 0, Math.PI*2); }
     ctx.fill();
 
     // belly shine
-    ctx.fillStyle = belly;
-    ctx.globalAlpha = 0.58;
+    ctx.fillStyle = 'rgba(255,243,193,0.55)';
     ctx.beginPath();
-    ctx.ellipse(2, radiusY*0.28, radiusX*0.72, radiusY*0.50, 0, 0, Math.PI*2);
+    if(ctx.ellipse){ ctx.ellipse(2, radiusY*0.28, radiusX*0.7, radiusY*0.45, 0,0,Math.PI*2); }
+    else { ctx.arc(0, radiusY*0.2, radiusY*0.5,0,Math.PI*2); }
     ctx.fill();
-    ctx.globalAlpha = 1;
 
-    // scale pattern
-    ctx.strokeStyle = 'rgba(138,66,7,0.28)';
-    ctx.lineWidth = 1;
-    for(let sx=-radiusX*0.72; sx<radiusX*0.7; sx+=10){
-      ctx.beginPath();
-      ctx.arc(sx*0.9, 1, 5.5, Math.PI*0.08, Math.PI*0.92);
-      ctx.stroke();
-    }
-    // dorsal spines / jeweled crest
-    if(i < BODY_SEGMENTS-4 && i % 2 === 0){
+    // dorsal spine
+    if(i < BODY_SEGMENTS-3 && i % 2 === 0){
       ctx.fillStyle = '#ffefb8';
-      ctx.strokeStyle = '#d9a441';
-      ctx.lineWidth = 1.2;
       ctx.beginPath();
-      ctx.moveTo(-3, -radiusY);
-      ctx.lineTo(0, -radiusY - (11 + Math.sin(tSec*4+i)*2));
-      ctx.lineTo(3, -radiusY);
-      ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      // jewel
-      ctx.fillStyle = (i%4===0) ? '#ff3a5a' : '#37ffe4';
-      ctx.beginPath();
-      ctx.arc(0, -radiusY-2, 1.8, 0, Math.PI*2);
-      ctx.fill();
+      ctx.moveTo(-2, -radiusY);
+      ctx.lineTo(0, -radiusY - 10);
+      ctx.lineTo(2, -radiusY);
+      ctx.closePath(); ctx.fill();
     }
-
-    // legs / claws (eastern dragon small)
-    if(i>3 && i < 24 && i % 6 === 2){
-      const legSwing = Math.sin(tSec*6 + i)*0.5;
-      ctx.save();
-      ctx.rotate(1.15 + legSwing*0.22);
-      ctx.fillStyle = '#e9b94a';
-      ctx.fillRect(0, radiusY*0.4, 20, 4);
-      // claw
-      ctx.fillStyle = '#fff3ca';
-      for(let ccl=0;ccl<3;ccl++){
-        ctx.beginPath();
-        ctx.moveTo(18 + ccl*2, radiusY*0.4 -1);
-        ctx.lineTo(26 + ccl*1.2, radiusY*0.4 + 1 + ccl);
-        ctx.lineTo(20 + ccl*2, radiusY*0.4 + 4);
-        ctx.closePath(); ctx.fill();
-      }
-      ctx.restore();
-      // mirror lower
-      ctx.save();
-      ctx.rotate(-1.15 - legSwing*0.22);
-      ctx.fillStyle = '#e9b94a';
-      ctx.fillRect(0, -radiusY*0.4-4, 18, 4);
-      ctx.restore();
-    }
-
-    // golden ring / armor bands
-    if(i % 5 === 1 && i < BODY_SEGMENTS-6){
-      ctx.strokeStyle = '#fff0b8';
-      ctx.lineWidth = 2.2;
-      ctx.globalAlpha = 0.9;
-      ctx.beginPath();
-      ctx.ellipse(0,0, radiusX*0.86, radiusY*0.98, 0, -0.75, 0.75);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-      // small gem
-      ctx.fillStyle = '#ff4a78';
-      ctx.beginPath(); ctx.arc(0, -radiusY*0.95, 2.4, 0, Math.PI*2); ctx.fill();
-      ctx.fillStyle = 'rgba(255,255,255,0.65)';
-      ctx.beginPath(); ctx.arc(-0.6,-radiusY*1.05,0.9,0,Math.PI*2); ctx.fill();
-    }
-
     ctx.restore();
 
-    // WINGS at segment ~5-7
-    if(i===6 || i===7){
-      const wSide = (i===6?1:-1);
-      const wingOpen = wingFlap * wSide;
-      const wx = n.x, wy = n.y;
-      ctx.save();
-      ctx.translate(wx, wy);
-      ctx.rotate(n.a + wingOpen*0.24);
-      // wing membrane luxurious batik
-      const wingGrad = ctx.createLinearGradient(-10, -22*wSide, 160, 60*wSide);
-      wingGrad.addColorStop(0, '#ffeaab');
-      wingGrad.addColorStop(0.25, '#ffc24b');
-      wingGrad.addColorStop(0.6, '#d66d12');
-      wingGrad.addColorStop(1, '#7a1e08');
-      ctx.fillStyle = wingGrad;
-      ctx.strokeStyle = '#ffdf8a';
-      ctx.lineWidth = 2;
-      ctx.shadowColor = 'rgba(255,162,40,0.19)';
-      ctx.shadowBlur = 18;
+    // wings
+    if(i===5 || i===6){
+      var wSide = (i===5?1:-1);
+      var wingOpen = wingFlap * wSide;
+      ctx.save(); ctx.translate(n.x, n.y); ctx.rotate(n.a + wingOpen*0.22);
+      ctx.fillStyle = '#ffc24b';
+      ctx.strokeStyle = '#ffdf8a'; ctx.lineWidth = 2;
       ctx.beginPath();
-      // wing shape
-      ctx.moveTo(-8, 0);
-      ctx.bezierCurveTo(36, -98*wSide - wingOpen*22, 130, -126*wSide, 186, -62*wSide);
-      ctx.bezierCurveTo(150, -44*wSide, 108, -18*wSide, 78, -4*wSide);
-      ctx.bezierCurveTo(46, 14*wSide, 18, 8*wSide, -6, 2);
-      ctx.closePath();
-      ctx.fill(); ctx.stroke();
-      // wing bones gold
-      ctx.strokeStyle = '#ffe7a4';
-      ctx.lineWidth = 2.6;
-      for(let wb=1; wb<=4; wb++){
-        ctx.beginPath();
-        ctx.moveTo(2,0);
-        ctx.quadraticCurveTo(58+wb*12, -46*wSide*wb*0.58, 150+wb*6, -58*wSide - wb*3*wSide);
-        ctx.stroke();
-      }
-      // batik vein ornament
-      ctx.strokeStyle = 'rgba(255,235,180,0.34)';
-      ctx.lineWidth = 1;
-      for(let v=0; v<3; v++){
-        ctx.beginPath();
-        ctx.moveTo(35+v*30, -14*wSide);
-        ctx.quadraticCurveTo(88+v*18, -62*wSide, 148, -48*wSide);
-        ctx.stroke();
-      }
-      // wing edge jewels
-      [[64,-58],[118,-96],[172,-72]].forEach(([jx,jy])=>{
-        ctx.fillStyle = '#ff587a';
-        ctx.beginPath(); ctx.arc(jx, jy*wSide, 2.8, 0, Math.PI*2); ctx.fill();
-        ctx.fillStyle = 'rgba(255,255,255,0.55)';
-        ctx.beginPath(); ctx.arc(jx-0.8, jy*wSide-0.8, 0.9, 0, Math.PI*2); ctx.fill();
-      });
+      ctx.moveTo(-6,0);
+      ctx.bezierCurveTo(30, -82*wSide, 110, -108*wSide, 155, -54*wSide);
+      ctx.bezierCurveTo(120, -36*wSide, 70, -8*wSide, -4, 2);
+      ctx.closePath(); ctx.fill(); ctx.stroke();
       ctx.restore();
     }
   }
 
-  // HEAD - luxurious
-  ctx.save();
-  ctx.translate(head.x, head.y);
-  ctx.rotate(head.ang);
-  // mane aura
-  ctx.shadowColor = '#ffba3a';
-  ctx.shadowBlur = 28;
-  // long snout majestic
-  const hg = ctx.createLinearGradient(-16,-26,72,18);
-  hg.addColorStop(0, '#fff3cb');
-  hg.addColorStop(0.22, '#ffda6f');
-  hg.addColorStop(0.55, '#e3a523');
-  hg.addColorStop(1, '#a85c12');
-  ctx.fillStyle = hg;
-  ctx.beginPath();
-  ctx.ellipse(14, -1, 37, 22, 0.06, 0, Math.PI*2);
-  ctx.fill();
-  // jaw
-  ctx.fillStyle = '#f2c15a';
-  ctx.beginPath();
-  ctx.ellipse(18, 13, 29, 11, 0.1, 0, Math.PI*2);
-  ctx.fill();
-  ctx.shadowBlur = 0;
-  // nostrils
-  ctx.fillStyle = '#7a2b0a';
-  ctx.beginPath(); ctx.ellipse(42, -2, 2.8, 3.8, 0.4, 0, Math.PI*2); ctx.fill();
-  // golden nasal armor
-  ctx.strokeStyle = '#fff0b6';
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.moveTo(34, -14);
-  ctx.quadraticCurveTo(48, -8, 52, -3);
-  ctx.stroke();
-  // eye majestic
-  ctx.save();
-  ctx.translate(6, -10);
-  const eyeGlow = ctx.createRadialGradient(0,0,1,0,0,12);
-  eyeGlow.addColorStop(0, '#fff6dd');
-  eyeGlow.addColorStop(0.4, '#ffca46');
-  eyeGlow.addColorStop(1, '#ff5e1a');
-  ctx.fillStyle = eyeGlow;
-  ctx.shadowColor = '#ff7a21';
-  ctx.shadowBlur = 16;
-  ctx.beginPath(); ctx.ellipse(0,0,9.5,7.2, -0.2,0,Math.PI*2); ctx.fill();
-  ctx.shadowBlur =0;
-  // pupil slit
+  // HEAD
+  ctx.save(); ctx.translate(head.x, head.y); ctx.rotate(head.ang);
+  ctx.fillStyle = '#ffda6f';
+  if(ctx.ellipse){ ctx.beginPath(); ctx.ellipse(12, -1, 34, 19, 0.06, 0, Math.PI*2); ctx.fill(); }
+  else { ctx.beginPath(); ctx.arc(12,-1,20,0,Math.PI*2); ctx.fill(); }
+  // eye
+  ctx.fillStyle = '#ffca46';
+  ctx.beginPath(); ctx.arc(4, -9, 7, 0, Math.PI*2); ctx.fill();
   ctx.fillStyle = '#1a0300';
   ctx.beginPath();
-  ctx.ellipse(1.3,0,2.1,5.5, -0.18,0,Math.PI*2);
+  if(ctx.ellipse){ ctx.ellipse(5, -9, 1.8, 4.8, -0.15, 0, Math.PI*2); }
+  else { ctx.arc(5,-9,2.5,0,Math.PI*2); }
   ctx.fill();
-  // highlight
-  ctx.fillStyle = 'rgba(255,255,255,0.9)';
-  ctx.beginPath(); ctx.arc(-2.1,-2.4,1.7,0,Math.PI*2); ctx.fill();
-  ctx.restore();
-
-  // horns - majestic curved
-  ctx.strokeStyle = '#fff0c8';
-  ctx.lineWidth = 4.5;
-  ctx.lineCap = 'round';
-  // main horn
+  // horn
+  ctx.strokeStyle = '#fff0c8'; ctx.lineWidth = 4; ctx.lineCap='round';
+  ctx.beginPath(); ctx.moveTo(-3,-15); ctx.quadraticCurveTo(10,-38, 6,-56); ctx.stroke();
+  // whiskers
+  ctx.strokeStyle = '#fff1c8'; ctx.lineWidth = 1.6;
   ctx.beginPath();
-  ctx.moveTo(-4, -18);
-  ctx.bezierCurveTo(10,-44, 24,-56, 8,-70);
+  ctx.moveTo(34,3); ctx.quadraticCurveTo(68,8, 112, 0);
+  ctx.moveTo(32,8); ctx.quadraticCurveTo(60,18, 96, 14);
   ctx.stroke();
-  ctx.lineWidth = 3.5;
-  ctx.beginPath();
-  ctx.moveTo(2, -16);
-  ctx.bezierCurveTo(26,-34, 42,-36, 34,-54);
-  ctx.stroke();
-  // jewels on horn
-  [[18,-46,'#ff3b6a'],[30,-42,'#49ffdb'],[6,-62,'#ffd84a']].forEach(([hx,hy,col])=>{
-    ctx.fillStyle = col;
-    ctx.beginPath(); ctx.arc(hx, hy, 2.6,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = 'rgba(255,255,255,.62)';
-    ctx.beginPath(); ctx.arc(hx-0.8, hy-0.8, 0.9,0,Math.PI*2); ctx.fill();
-  });
-  // antlers lower
-  ctx.lineWidth = 2.2;
-  ctx.strokeStyle = '#ffe6a6';
-  ctx.beginPath();
-  ctx.moveTo(-10,-8); ctx.lineTo(-28,-22); ctx.moveTo(-20,-15); ctx.lineTo(-33,-8);
-  ctx.stroke();
-
-  // royal crown / mahkota
-  ctx.fillStyle = '#ffda6a';
-  ctx.strokeStyle = '#fff5cd';
-  ctx.lineWidth = 1.5;
-  ctx.beginPath();
-  ctx.moveTo(-12,-21); ctx.lineTo(-6,-32); ctx.lineTo(0,-26); ctx.lineTo(7,-33); ctx.lineTo(13,-23);
-  ctx.lineTo(4,-19); ctx.closePath();
-  ctx.fill(); ctx.stroke();
-  // crown gems
-  [[-6,-28,'#ff3f6b'],[7,-29,'#31ffe0'],[0,-23,'#ffffff']].forEach(([cxg,cyg,c)=>{
-    ctx.fillStyle = c;
-    ctx.beginPath(); ctx.arc(cxg,cyg,2,0,Math.PI*2); ctx.fill();
-  });
-
-  // whiskers silk
-  ctx.strokeStyle = '#fff1c8';
-  ctx.lineWidth = 1.5;
-  ctx.shadowColor = '#ffd166';
-  ctx.shadowBlur = 6;
-  const whiskerSway = Math.sin(tSec*3.1)*3;
-  ctx.beginPath();
-  ctx.moveTo(40,4);
-  ctx.bezierCurveTo(72+whiskerSway,10, 110, 5, 138, -2);
-  ctx.moveTo(38,9);
-  ctx.bezierCurveTo(66,22, 96,18, 124, 16);
-  ctx.stroke();
-  ctx.shadowBlur = 0;
-  // beard / mane tassels
-  ctx.fillStyle = '#ffe5a1';
-  for(let mb=0; mb<7; mb++){
-    const bx = -6 - mb*4;
-    const by = 14 + Math.sin(tSec*4 + mb)*2;
-    ctx.beginPath();
-    ctx.moveTo(bx, 12);
-    ctx.quadraticCurveTo(bx-2, by+14, bx+1, by+27);
-    ctx.quadraticCurveTo(bx+3, by+14, bx,12);
-    ctx.fill();
-  }
   // fangs
   ctx.fillStyle = '#fff9e9';
-  ctx.beginPath();
-  ctx.moveTo(38,10); ctx.lineTo(41,22); ctx.lineTo(34,14); ctx.closePath(); ctx.fill();
-  ctx.beginPath();
-  ctx.moveTo(28,11); ctx.lineTo(30,19); ctx.lineTo(25,14); ctx.closePath(); ctx.fill();
-
-  ctx.restore(); // end head
-
-  // FIRE BREATH
-  firePower *= 0.985;
-  if(firePower > 0.08){
-    const fireOriginX = head.x + Math.cos(head.ang)*52;
-    const fireOriginY = head.y + Math.sin(head.ang)*52 - 2;
-    const fireDir = head.ang + (Math.random()-0.5)*0.11;
-    const count = Math.ceil(firePower*5);
-    for(let f=0; f<count; f++){
-      const speed = 5 + Math.random()*7 + firePower*2.4;
-      spawnEmber(
-        fireOriginX + (Math.random()-0.5)*8,
-        fireOriginY + (Math.random()-0.5)*8,
-        Math.cos(fireDir)*speed + (Math.random()-0.5)*1.8,
-        Math.sin(fireDir)*speed + (Math.random()-0.5)*1.8,
-        34 + Math.random()*26,
-        1
-      );
-    }
-    // core flame cone
-    ctx.save();
-    ctx.translate(fireOriginX, fireOriginY);
-    ctx.rotate(head.ang);
-    const flameLen = 68 + firePower*54;
-    const flg = ctx.createLinearGradient(0,0,flameLen,0);
-    flg.addColorStop(0,'rgba(255,255,240,0.98)');
-    flg.addColorStop(0.18,'rgba(255,214,80,0.92)');
-    flg.addColorStop(0.48,'rgba(255,115,22,0.7)');
-    flg.addColorStop(1,'rgba(190,22,50,0)');
-    ctx.fillStyle = flg;
-    ctx.shadowColor = '#ff8a1a';
-    ctx.shadowBlur = 28;
-    ctx.beginPath();
-    ctx.moveTo(0,-14);
-    ctx.quadraticCurveTo(flameLen*0.62, -28 - Math.sin(tSec*20)*5, flameLen, -5);
-    ctx.quadraticCurveTo(flameLen*0.62, 4, 0, 16);
-    ctx.closePath();
-    ctx.fill();
-    ctx.restore();
-  }
-
-  // ambient dragon ember drips
-  if(Math.random() < (majesticMode?0.19:0.35)){
-    const seg = body[ (Math.random()*8|0) + 2 ];
-    spawnEmber(seg.x + (Math.random()-0.5)*14, seg.y + 16 + Math.random()*6,
-      (Math.random()-0.5)*0.6, 0.45 + Math.random()*0.9, 44+Math.random()*32, 0);
-  }
-
-  // update & draw embers
-  ctx.save();
-  for(let i=embers.length-1;i>=0;i--){
-    const e = embers[i];
-    e.x += e.vx; e.y += e.vy; e.vx *= 0.993; e.vy += e.col? -0.008 : 0.036;
-    e.life--;
-    if(e.life<=0){ embers.splice(i,1); continue; }
-    const al = e.life / e.max;
-    if(e.col===1){ // fire
-      ctx.globalAlpha = al;
-      ctx.fillStyle = al>0.6 ? '#fff8d6' : al>0.3 ? '#ff9d21' : '#ff3a2a';
-      ctx.shadowColor = '#ff6a11'; ctx.shadowBlur = 12;
-      ctx.beginPath(); ctx.arc(e.x, e.y, 2.1 + al*3.4, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur = 0;
-    } else {
-      ctx.globalAlpha = al*0.94;
-      ctx.fillStyle = '#ffcc5c';
-      ctx.shadowColor = '#ffb733'; ctx.shadowBlur = 8;
-      ctx.beginPath(); ctx.arc(e.x, e.y, 1.3, 0, Math.PI*2); ctx.fill();
-      ctx.shadowBlur = 0;
-    }
-  }
+  ctx.beginPath(); ctx.moveTo(32,9); ctx.lineTo(35,19); ctx.lineTo(28,13); ctx.closePath(); ctx.fill();
   ctx.restore();
 
-  // floating gold lotus petals / aksara
-  if(time % 42 < 16){
-    ctx.save();
-    ctx.globalAlpha = 0.11;
-    ctx.fillStyle = '#ffd676';
-    ctx.font = '22px "Cinzel Decorative", serif';
-    ctx.fillText('ꦤꦒ', W*0.08 + Math.sin(tSec*0.4)*8, H*0.21 + Math.cos(tSec*0.6)*5);
-    ctx.fillText('ꦱꦸꦮꦂꦤ', W*0.86, H*0.77);
+  // fire
+  firePower *= 0.982;
+  if(firePower > 0.08){
+    var fireOriginX = head.x + Math.cos(head.ang)*46;
+    var fireOriginY = head.y + Math.sin(head.ang)*46;
+    for(var f=0; f< Math.ceil(firePower*4); f++){
+      var speed = 5 + Math.random()*6 + firePower*2;
+      var fdir = head.ang + (Math.random()-0.5)*0.14;
+      embers.push({x:fireOriginX, y:fireOriginY, vx:Math.cos(fdir)*speed, vy:Math.sin(fdir)*speed, life:28+Math.random()*20, max: 40, col:1});
+    }
+    ctx.save(); ctx.translate(fireOriginX, fireOriginY); ctx.rotate(head.ang);
+    var flameLen = 60 + firePower*48;
+    var flg = ctx.createLinearGradient(0,0,flameLen,0);
+    flg.addColorStop(0,'rgba(255,255,240,0.95)');
+    flg.addColorStop(0.4,'rgba(255,130,22,0.7)');
+    flg.addColorStop(1,'rgba(190,22,50,0)');
+    ctx.fillStyle = flg;
+    ctx.beginPath(); ctx.moveTo(0,-12); ctx.lineTo(flameLen, -3); ctx.lineTo(flameLen, 3); ctx.lineTo(0,12); ctx.closePath(); ctx.fill();
     ctx.restore();
   }
 
-  // HUD tip fade near dragon
-  if(firePower>0.5){
-    ctx.save();
-    ctx.globalAlpha = Math.min(0.9, firePower*0.45);
-    ctx.fillStyle = '#ffe9aa';
-    ctx.font = '600 13px "Cormorant Garamond", serif';
-    ctx.fillText('SEM BUR API SUCI!', head.x+54, head.y-44);
-    ctx.restore();
+  // embers
+  for(var i=embers.length-1;i>=0;i--){
+    var e = embers[i];
+    e.x += e.vx; e.y += e.vy; e.vx *= 0.992; e.vy += e.col? -0.01 : 0.032;
+    e.life--;
+    if(e.life<=0){ embers.splice(i,1); continue; }
+    var al = e.life / e.max;
+    ctx.globalAlpha = al;
+    ctx.fillStyle = e.col ? '#ff9d21' : '#ffcc5c';
+    ctx.beginPath(); ctx.arc(e.x, e.y, e.col? 2.2 : 1.3, 0, Math.PI*2); ctx.fill();
+    ctx.globalAlpha = 1;
   }
 
+  }catch(err){
+    showErr(err.message);
+    return;
+  }
   requestAnimationFrame(draw);
 }
-draw();
 
-// UI fire decay slowly
-setInterval(()=>{ if(firePower>0) firePower = Math.max(0, firePower-0.08); }, 60);
+requestAnimationFrame(draw);
+setInterval(function(){ if(firePower>0) firePower = Math.max(0, firePower-0.09); }, 60);
+
+document.getElementById('c').addEventListener('contextmenu', function(e){ e.preventDefault(); });
 
 })();
 </script>
